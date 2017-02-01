@@ -1,0 +1,8 @@
+virtualbox_user: virtualbox
+virtualbox_group: virtualbox
+virtualbox_log_dir: /var/log/virtualbox
+virtualbox_db_dir: "{{ __virtualbox_db_dir }}"
+virtualbox_service: virtualbox
+virtualbox_conf_dir: "{{ __virtualbox_conf_dir }}"
+virtualbox_conf_file: "{{ __virtualbox_conf_dir }}/virtualbox.conf"
+virtualbox_flags: ""

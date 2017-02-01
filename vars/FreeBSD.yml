@@ -1,0 +1,2 @@
+__virtualbox_db_dir: /var/db/virtualbox
+__virtualbox_conf_dir: /usr/local/etc/virtualbox

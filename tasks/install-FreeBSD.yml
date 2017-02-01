@@ -1,0 +1,6 @@
+---
+
+- name: Install virtualbox
+  pkgng:
+    name: virtualbox
+    state: present
