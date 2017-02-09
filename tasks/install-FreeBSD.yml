@@ -2,5 +2,5 @@
 
 - name: Install virtualbox
   pkgng:
-    name: virtualbox
+    name: virtualbox-ose
     state: present

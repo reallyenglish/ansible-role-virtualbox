@@ -1,0 +1,6 @@
+---
+
+- name: Install virtualbox
+  package:
+    name: virtualbox
+    state: installed

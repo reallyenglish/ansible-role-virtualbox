@@ -1,0 +1,14 @@
+---
+
+- name: Add Virtualbox repo
+  yum_repository:
+    name: virtualbox
+    baseurl: http://download.virtualbox.org/virtualbox/rpm/el/$releasever/$basearch
+    gpgkey: https://www.virtualbox.org/download/oracle_vbox.asc
+    description: Virtualbox official repo
+    gpgcheck: yes
+
+- name: Install virtualbox
+  package:
+    name: VirtualBox-{{ virtualbox_version }}
+    state: installed

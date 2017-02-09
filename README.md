@@ -1,6 +1,6 @@
 # ansible-role-virtualbox
 
-A brief description of the role goes here.
+Installs and configures virtualbox
 
 # Requirements
 

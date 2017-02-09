@@ -1,7 +1,7 @@
 virtualbox_kernel_modules:
   - mname: vboxdrv
     kname: vboxdrv
-  - mname: ng_vboxnetflt
+  - mname: vboxnetflt
     kname: vboxnetflt
   - mname: vboxnetadp
     kname: vboxnetadp

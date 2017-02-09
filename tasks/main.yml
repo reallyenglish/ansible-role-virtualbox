@@ -5,33 +5,17 @@
 
 - include: "install-{{ ansible_os_family }}.yml"
 
-- name: Create log directory
-  file:
-    path: "{{ virtualbox_log_dir }}"
-    mode: 0755
-    owner: "{{ virtualbox_user }}"
-    group: "{{ virtualbox_group }}"
-    state: directory
-  notify: Restart virtualbox
+- name: Register kernel modules
+  when: ansible_os_family == "FreeBSD"
+  command: kldstat -q -m "{{ item.mname }}"
+  with_items: "{{ virtualbox_kernel_modules }}"
+  register: register_virtualbox_kldstat
+  changed_when: false
+  ignore_errors: true
 
-- name: Create db directory
-  file:
-    path: "{{ virtualbox_db_dir }}"
-    mode: 0755
-    owner: "{{ virtualbox_user }}"
-    group: "{{ virtualbox_group }}"
-    state: directory
-  notify: Restart virtualbox
-
-- name: Create virtualbox.conf
-  template:
-    src: virtualbox.conf.j2
-    dest: "{{ virtualbox_conf_file }}"
-    validate: echo %s
-  notify: Restart virtualbox
-
-- name: Start virtualbox
-  service:
-    name: "{{ virtualbox_service }}"
-    enabled: true
-    state: started
+- name: Load kernel modules
+  command: kldload "{{ item.item.kname }}"
+  when:
+    - ansible_os_family == "FreeBSD"
+    - item.rc != 0
+  with_items: "{{ register_virtualbox_kldstat.results }}"
