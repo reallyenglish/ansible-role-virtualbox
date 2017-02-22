@@ -1,1 +1,3 @@
-virtualbox_version: 5.1
+__virtualbox_user: vboxusers
+__virtualbox_group: vboxusers
+__virtualbox_version_redhat: 5.1
