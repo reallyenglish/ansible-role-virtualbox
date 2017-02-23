@@ -14,6 +14,8 @@ None
 | `virtualbox_group` | Virtualbox group | `{{ __virtualbox_group }}` |
 | `virtualbox_kernel_modules` | Virtualbox kernel modules | `{{ __virtualbox_kernel_modules|default('') }}` |
 | `virtualbox_version_redhat` | Virtualbox version in RedHat | `{{ __virtualbox_version_redhat|default('') }}` |
+### virtualbox_version_redhat
+see [http://download.virtualbox.org/virtualbox/rpm/rhel/7/](http://download.virtualbox.org/virtualbox/rpm/rhel/7/) for available versions.
 
 ## Debian
 
