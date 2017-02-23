@@ -10,7 +10,54 @@ None
 
 | variable | description | default |
 |----------|-------------|---------|
+| `virtualbox_user` | Virtualbox user | `{{ __virtualbox_user }}` |
+| `virtualbox_group` | Virtualbox group | `{{ __virtualbox_group }}` |
+| `virtualbox_kernel_modules` | Virtualbox kernel modules | `{{ __virtualbox_kernel_modules|default('') }}` |
+| `virtualbox_version_redhat` | Virtualbox version in RedHat | `{{ __virtualbox_version_redhat|default('') }}` |
+### virtualbox_version_redhat
+see [http://download.virtualbox.org/virtualbox/rpm/rhel/7/](http://download.virtualbox.org/virtualbox/rpm/rhel/7/) for available versions.
 
+## Debian
+
+| Variable | Default |
+|----------|---------|
+| `__virtualbox_user` | `vboxusers` |
+| `__virtualbox_group` | `vboxusers` |
+| `__virtualbox_kernel_modules` | ( see below ) |
+## __virtualbox_kernel_modules
+```yaml
+  - mname: vboxdrv
+    kname: vboxdrv
+  - mname: vboxnetflt
+    kname: vboxnetflt
+  - mname: vboxnetadp
+    kname: vboxnetadp
+```
+
+## FreeBSD
+
+| Variable | Default |
+|----------|---------|
+| `__virtualbox_user` | `vboxusers` |
+| `__virtualbox_group` | `vboxusers` |
+| `__virtualbox_kernel_modules` | ( see below ) |
+## __virtualbox_kernel_modules
+```yaml
+  - mname: vboxdrv
+    kname: vboxdrv
+  - mname: ng_vboxnetflt
+    kname: vboxnetflt
+  - mname: vboxnetadp
+    kname: vboxnetadp
+```
+
+## RedHat
+
+| Variable | Default |
+|----------|---------|
+| `__virtualbox_user` | `vboxusers` |
+| `__virtualbox_group` | `vboxusers` |
+| `__virtualbox_version_redhat` | `5.1` |
 
 # Dependencies
 
@@ -19,6 +66,9 @@ None
 # Example Playbook
 
 ```yaml
+- hosts: localhost
+  roles:
+    - ansible-role-virtualbox
 ```
 
 # License

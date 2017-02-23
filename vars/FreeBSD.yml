@@ -1,4 +1,6 @@
-virtualbox_kernel_modules:
+__virtualbox_user: vboxusers
+__virtualbox_group: vboxusers
+__virtualbox_kernel_modules:
   - mname: vboxdrv
     kname: vboxdrv
   - mname: ng_vboxnetflt

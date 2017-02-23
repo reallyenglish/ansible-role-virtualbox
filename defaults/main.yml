@@ -1,2 +1,4 @@
-virtualbox_user: vboxusers
-virtualbox_group: vboxusers
+virtualbox_user: "{{ __virtualbox_user }}"
+virtualbox_group: "{{ __virtualbox_group }}"
+virtualbox_kernel_modules: "{{ __virtualbox_kernel_modules|default('') }}"
+virtualbox_version_redhat: "{{ __virtualbox_version_redhat|default('') }}"

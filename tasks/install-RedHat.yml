@@ -10,5 +10,5 @@
 
 - name: Install virtualbox
   package:
-    name: VirtualBox-{{ virtualbox_version }}
+    name: VirtualBox-{{ virtualbox_version_redhat }}
     state: installed
