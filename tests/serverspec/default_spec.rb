@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'serverspec'
 
 package = 'virtualbox'
-# service = 'virtualbox'
+service = 'vboxdrv'
 user    = 'vboxusers'
 group   = 'vboxusers'
 kernel_modules = %w(vboxdrv vboxnetflt vboxnetadp)
@@ -10,8 +10,12 @@ kernel_modules = %w(vboxdrv vboxnetflt vboxnetadp)
 case os[:family]
 when 'freebsd'
   package = 'virtualbox-ose'
-  # service = 'vboxnet'
+  service = 'vboxnet'
   kernel_modules = %w(vboxdrv ng_vboxnetflt vboxnetadp)
+when 'ubuntu'
+  if Gem::Version.new(os[:release]) <= Gem::Version.new("16.04")
+    service = 'virtualbox'
+  end
 when 'redhat'
   package = 'VirtualBox-5.1'
 end
@@ -37,7 +41,12 @@ kernel_modules.each do |m|
   end
 end
 
-# describe service(service) do
-#  it { should be_running }
-#  it { should be_enabled }
-# end
+describe service(service) do
+  it { should be_enabled }
+  it do
+    pending 'does not support status' if os[:family] == 'freebsd'
+    pending 'status returns kernel module loaded' if os[:family] == 'ubuntu' &&
+  Gem::Version.new(os[:release]) < Gem::Version.new("16.04")
+    should be_running
+  end
+end
