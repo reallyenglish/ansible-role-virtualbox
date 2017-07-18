@@ -1,23 +1,23 @@
-require 'spec_helper'
-require 'serverspec'
+require "spec_helper"
+require "serverspec"
 
-package = 'virtualbox'
-service = 'vboxdrv'
-user    = 'vboxusers'
-group   = 'vboxusers'
+package = "virtualbox"
+service = "vboxdrv"
+user    = "vboxusers"
+group   = "vboxusers"
 kernel_modules = %w(vboxdrv vboxnetflt vboxnetadp)
 
 case os[:family]
-when 'freebsd'
-  package = 'virtualbox-ose'
-  service = 'vboxnet'
+when "freebsd"
+  package = "virtualbox-ose"
+  service = "vboxnet"
   kernel_modules = %w(vboxdrv ng_vboxnetflt vboxnetadp)
-when 'ubuntu'
+when "ubuntu"
   if Gem::Version.new(os[:release]) <= Gem::Version.new("16.04")
-    service = 'virtualbox'
+    service = "virtualbox"
   end
-when 'redhat'
-  package = 'VirtualBox-5.1'
+when "redhat"
+  package = "VirtualBox-5.1"
 end
 
 describe package(package) do
@@ -25,7 +25,7 @@ describe package(package) do
 end
 
 case os[:family]
-when 'freebsd'
+when "freebsd"
   describe user(user) do
     it { should exist }
   end
@@ -44,9 +44,9 @@ end
 describe service(service) do
   it { should be_enabled }
   it do
-    pending 'does not support status' if os[:family] == 'freebsd'
-    pending 'status returns kernel module loaded' if os[:family] == 'ubuntu' &&
-  Gem::Version.new(os[:release]) < Gem::Version.new("16.04")
+    pending "does not support status" if os[:family] == "freebsd"
+    pending "status returns kernel module loaded" if os[:family] == "ubuntu" &&
+                                                     Gem::Version.new(os[:release]) < Gem::Version.new("16.04")
     should be_running
   end
 end
