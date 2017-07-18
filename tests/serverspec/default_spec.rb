@@ -46,7 +46,7 @@ describe service(service) do
   it do
     pending "does not support status" if os[:family] == "freebsd"
     pending "specinfra checks running process" if os[:family] == "ubuntu" &&
-                                                     Gem::Version.new(os[:release]) < Gem::Version.new("16.04")
+                                                  Gem::Version.new(os[:release]) < Gem::Version.new("16.04")
     should be_running
   end
 end
