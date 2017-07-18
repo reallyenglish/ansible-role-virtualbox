@@ -45,7 +45,7 @@ describe service(service) do
   it { should be_enabled }
   it do
     pending "does not support status" if os[:family] == "freebsd"
-    pending "status returns kernel module loaded" if os[:family] == "ubuntu" &&
+    pending "specinfra checks running process" if os[:family] == "ubuntu" &&
                                                      Gem::Version.new(os[:release]) < Gem::Version.new("16.04")
     should be_running
   end
