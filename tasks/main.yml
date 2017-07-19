@@ -5,24 +5,4 @@
 
 - include: "install-{{ ansible_os_family }}.yml"
 
-- name: Register kernel modules
-  when: ansible_os_family == "FreeBSD"
-  command: kldstat -q -m "{{ item.mname }}"
-  with_items: "{{ virtualbox_kernel_modules }}"
-  register: register_virtualbox_kldstat
-  changed_when: false
-  ignore_errors: true
-  always_run: yes
-
-- name: Load kernel modules
-  command: kldload "{{ item.item.kname }}"
-  when:
-    - ansible_os_family == "FreeBSD"
-    - item.rc != 0
-  with_items: "{{ register_virtualbox_kldstat.results }}"
-
-- name: Enable vboxnet service
-  service:
-    name: vboxnet
-    enabled: yes
-  when: ansible_os_family == "FreeBSD"
+- include: "configure-{{ ansible_os_family }}.yml"
