@@ -1,0 +1,19 @@
+---
+- name: Register kernel modules
+  command: kldstat -q -m "{{ item.mname }}"
+  with_items: "{{ virtualbox_kernel_modules }}"
+  register: register_virtualbox_kldstat
+  changed_when: false
+  ignore_errors: true
+  always_run: yes
+
+- name: Load kernel modules
+  command: kldload "{{ item.item.kname }}"
+  when:
+    - item.rc != 0
+  with_items: "{{ register_virtualbox_kldstat.results }}"
+
+- name: Enable vboxnet service
+  service:
+    name: vboxnet
+    enabled: yes
