@@ -5,13 +5,13 @@ package = "virtualbox"
 service = "vboxdrv"
 user    = "vboxusers"
 group   = "vboxusers"
-kernel_modules = %w(vboxdrv vboxnetflt vboxnetadp)
+kernel_modules = %w[vboxdrv vboxnetflt vboxnetadp]
 
 case os[:family]
 when "freebsd"
   package = "virtualbox-ose"
   service = "vboxnet"
-  kernel_modules = %w(vboxdrv ng_vboxnetflt vboxnetadp)
+  kernel_modules = %w[vboxdrv ng_vboxnetflt vboxnetadp]
 when "ubuntu"
   if Gem::Version.new(os[:release]) <= Gem::Version.new("16.04")
     service = "virtualbox"
